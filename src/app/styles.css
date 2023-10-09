@@ -1,0 +1,137 @@
+/* =================== constants =================== */
+.material-symbols-outlined {
+	font-variation-settings:
+		'FILL' 0,
+		'wght' 400,
+		'GRAD' 0,
+		'opsz' 24
+}
+
+/* =================== media queries =================== */
+
+/* =================== mobile =================== */
+#container {
+	grid-column: span 4;
+	width: 100%;
+	max-width: 25rem;
+	margin: 1rem auto;
+}
+
+/* url shortie container */
+.header-container {
+	background-color: var(--accent-grey-white);
+	margin-bottom: 1rem;
+	padding: 1rem;
+	border-radius: var(--std-border-radius-container);
+	text-align: center;
+}
+
+#header {
+	text-transform: uppercase;
+}
+
+/* start of form */
+.form-container {
+	background-color: var(--accent-grey-white);
+	padding: var(--std-padding);
+	border-radius: var(--std-border-radius);
+}
+
+.label,
+.input {
+	display: block;
+}
+
+.label {
+	margin-bottom: 0.3rem;
+}
+
+input {
+	border: var(--std-border);
+}
+
+input,
+.input.copy {
+	padding: 0.6rem 0.8rem;
+	width: 100%;
+	color: var(--accent-light-orange);
+	margin-bottom: 1.4rem;
+	border-radius: var(--std-border-radius);
+}
+
+/* shortened url container */
+.input.copy {
+	background-color: var(--accent-white);
+	border: var(--std-border);
+
+}
+
+/* submit and copy button container */
+.button-container {
+	margin: 2rem 0rem;
+}
+
+.submit-btn {
+	margin: 0;
+	text-transform: uppercase;
+	font-weight: 700;
+
+	background-color: var(--accent-light-orange);
+	color: var(--accent-white);
+	border: none;
+	border-radius: var(--std-border-radius-container);
+	padding: 1rem 4rem;
+	transition: var(--std-transition);
+}
+
+.submit-btn:hover {
+	cursor: pointer;
+	background-color: var(--accent-dark-orange);
+	transition: var(--std-transition);
+}
+
+/* previous urls */
+#subheader {
+	font-size: 1.5em;
+	margin-bottom: 1rem;
+}
+
+.previous-urls-container {
+	display: grid;
+	grid-template-rows: min-content;
+	gap: 10px;
+}
+
+.prev-entry {
+	background-color: var(--accent-white);
+	border-radius: 1rem;
+	border: var(--std-border);
+	padding: 0.6rem 0.8rem;
+}
+
+.prev-entry a {
+	color: var(--accent-light-orange);
+}
+
+.prev-entry p {
+	font-size: .6em;
+	margin-top: .2rem;
+}
+
+
+/* =================== TABLET =================== */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+	#container {
+		grid-column: span 6;
+		max-width: 35rem;
+		min-width: 25rem;
+	}
+}
+
+/* =================== DESKTOP =================== */
+@media only screen and (min-width: 64.063em) {
+	#container {
+		grid-column: span 12;
+		max-width: 40rem;
+	}
+}
