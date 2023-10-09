@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./styles.css";
 
+// TODO: add sessionStorage vars and functions; figure out how do to without causing build error
 
 export default function Home() {
 	// =========== constant variables ===========

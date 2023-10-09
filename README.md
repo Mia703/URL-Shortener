@@ -33,6 +33,10 @@ Users can do the following:
 - How to prevent buttons other than the submit button to submit a form: https://stackoverflow.com/questions/932653/how-to-prevent-buttons-from-submitting-forms
 - How DIFFICULT it is to copy to clipboard: https://www.w3schools.com/howto/howto_js_copy_clipboard.asp
 - Using sessionStorage instead of localStorage, but they have the same functions: https://www.digitalocean.com/community/tutorials/js-introduction-localstorage-sessionstorage
+- There is a problem deploying the page with sessonStorage enabled, reference: 
+  - [How to use local or session storage in next js](https://stackoverflow.com/questions/66009011/how-to-use-local-or-session-storages-in-next-js)
+  - [Browser APIs](https://nextjs.org/docs/app/building-your-application/deploying/static-exports)
+  - need to safely access these APIs only when the browser is running
 
 # Next.js Information
 
