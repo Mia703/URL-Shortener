@@ -5,29 +5,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./styles.css";
 
-let storage_index = 0;
-
-// counts the number of urls shortened
-function counter() {
-	storage_index += 1;
-}
-
-// if the sessionStorage length is greater than 15,
-// del contents and reset counter
-function check_storage() {
-	if (sessionStorage.length >= 16) {
-		// clear sessionStorage
-		sessionStorage.clear();
-		// set counter to zero
-		storage_index = 0;
-	}
-}
-
-// on button click, del storage and reset counter
-function clear_storage() {
-	sessionStorage.clear();
-	storage_index = 0;
-}
 
 export default function Home() {
 	// =========== constant variables ===========
@@ -70,27 +47,11 @@ export default function Home() {
 		onSubmit: (values) => {
 			// console.log(values);
 
-			
-			useEffect(() => {
-				// clear contents if sessionStorage count is over 16 and reset counter
-				check_storage();
-	
-				// after submitting the form, shorten the long url and return the shortened object
-				let shortened = shortener.shorten(values.url);
+			// after submitting the form, shorten the long url and return the shortened object
+			let shortened = shortener.shorten(values.url);
 
-				// set the useState of shortened to the newly shortened url; so we can display it in HTML
-				setShortURL(shortened);
-
-				// save the shortened URL object to sessionStorage
-				sessionStorage.setItem(storage_index, JSON.stringify(shortened));
-
-				// increase counter for next entry
-				console.log("counter = " + storage_index);
-			}, []);
-
-
-			// to view items in sessionStorage: console.log(JSON.parse(sessionStorage.getItem(0)))
-			// to view the object's attributes: console.log(JSON.parse(sessionStorage.getItem(0)).target)
+			// set the useState of shortened to the newly shortened url; so we can display it in HTML
+			setShortURL(shortened);
 		},
 	});
 
@@ -140,43 +101,12 @@ export default function Home() {
 					</div>
 
 					<div className="button-container">
-						<input
-							className="submit-btn"
-							type="submit"
-							value="Shorten Url"
-							onClick={counter}
-						/>
-
-						{/* messed up counter for some reason, but does clear sessionStorage. Why? */}
-						{/* <button className="clear-btn" type="button" onClick={onclick_check_storage}>Clear History</button> */}
+						<input className="submit-btn" type="submit" value="Shorten Url" />
 					</div>
 				</form>
 
-				<h1 id="subheader">
-					Previous URLs{" "}
-					<span className="storage-counter">
-						({sessionStorage.length <= 0 ? "0" : sessionStorage.length})
-					</span>
-				</h1>
-				<div className="previous-urls-container">
-					{/* maps through sessionStorage entries and render */}
-					{Object.entries(sessionStorage).map(([key, valueJSON]) => {
-						const value = JSON.parse(valueJSON);
-
-						return (
-							<div className="prev-entry">
-								<a
-									className="prev-url target"
-									href={value.original}
-									target="_blank"
-								>
-									{value.target}
-								</a>
-								<p className="prev-url original">{value.original}</p>
-							</div>
-						);
-					})}
-				</div>
+				<h1 id="subheader">Previous URLs </h1>
+				<div className="previous-urls-container"></div>
 			</div>
 		</div>
 	);
