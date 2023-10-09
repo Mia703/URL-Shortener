@@ -34,7 +34,6 @@ export default function Home() {
 	// holds the shortened url after form submit; and used to display shortened url
 	const [shortURL, setShortURL] = useState("");
 
-	
 	// =========== shortener (= npm module that shortens urls) ===========
 	const shortener = new Shortener({
 		target: "https://shortie.com/",
@@ -71,22 +70,24 @@ export default function Home() {
 		onSubmit: (values) => {
 			// console.log(values);
 
-			// clear contents if sessionStorage count is over 16 and reset counter
-			check_storage();
-
-			// after submitting the form, shorten the long url and return the shortened object
-			let shortened = shortener.shorten(values.url);
-
-			// set the useState of shortened to the newly shortened url; so we can display it in HTML
-			setShortURL(shortened);
-
+			
 			useEffect(() => {
+				// clear contents if sessionStorage count is over 16 and reset counter
+				check_storage();
+	
+				// after submitting the form, shorten the long url and return the shortened object
+				let shortened = shortener.shorten(values.url);
+
+				// set the useState of shortened to the newly shortened url; so we can display it in HTML
+				setShortURL(shortened);
+
 				// save the shortened URL object to sessionStorage
 				sessionStorage.setItem(storage_index, JSON.stringify(shortened));
-			});
 
-			// increase counter for next entry
-			console.log("counter = " + storage_index);
+				// increase counter for next entry
+				console.log("counter = " + storage_index);
+			}, []);
+
 
 			// to view items in sessionStorage: console.log(JSON.parse(sessionStorage.getItem(0)))
 			// to view the object's attributes: console.log(JSON.parse(sessionStorage.getItem(0)).target)
