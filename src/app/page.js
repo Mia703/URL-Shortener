@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Shortener from "@studiohyperdrive/shortener";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -31,7 +31,10 @@ function clear_storage() {
 
 export default function Home() {
 	// =========== constant variables ===========
+	// holds the shortened url after form submit; and used to display shortened url
+	const [shortURL, setShortURL] = useState("");
 
+	
 	// =========== shortener (= npm module that shortens urls) ===========
 	const shortener = new Shortener({
 		target: "https://shortie.com/",
@@ -77,8 +80,10 @@ export default function Home() {
 			// set the useState of shortened to the newly shortened url; so we can display it in HTML
 			setShortURL(shortened);
 
-			// save the shortened URL object to sessionStorage
-			sessionStorage.setItem(storage_index, JSON.stringify(shortened));
+			useEffect(() => {
+				// save the shortened URL object to sessionStorage
+				sessionStorage.setItem(storage_index, JSON.stringify(shortened));
+			});
 
 			// increase counter for next entry
 			console.log("counter = " + storage_index);
@@ -89,9 +94,6 @@ export default function Home() {
 	});
 
 	// console.log(formik.errors);
-
-	// holds the shortened url after form submit; and used to display shortened url
-	const [shortURL, setShortURL] = useState("");
 
 	return (
 		<div id="container">
