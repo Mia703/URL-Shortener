@@ -7,10 +7,13 @@ import "./styles.css";
 
 // TODO: add sessionStorage vars and functions; figure out how do to without causing build error
 
+
 export default function Home() {
 	// =========== constant variables ===========
+
+
 	// holds the shortened url after form submit; and used to display shortened url
-	const [shortURL, setShortURL] = useState("");
+	const [short_url, set_short_url] = useState("");
 
 	// =========== shortener (= npm module that shortens urls) ===========
 	const shortener = new Shortener({
@@ -52,7 +55,11 @@ export default function Home() {
 			let shortened = shortener.shorten(values.url);
 
 			// set the useState of shortened to the newly shortened url; so we can display it in HTML
-			setShortURL(shortened);
+			set_short_url(shortened);
+
+			useEffect(() => {
+				localStorage.setItem('url', JSON.stringify(shortened))
+			}, [short_url])
 		},
 	});
 
@@ -86,12 +93,12 @@ export default function Home() {
 
 					<p className="label">Shortened URL</p>
 					<div className="input copy">
-						{/* if shortURL is not empty, then render shortened url,
+						{/* if short_url is not empty, then render shortened url,
 						 else render the placeholder shortie.com/ */}
-						{shortURL ? (
-							shortURL && (
-								<a id="result" href={shortURL.original} target="_blank">
-									{shortURL.target}
+						{short_url ? (
+							short_url && (
+								<a id="result" href={short_url.original} target="_blank">
+									{short_url.target}
 								</a>
 							)
 						) : (
@@ -102,7 +109,7 @@ export default function Home() {
 					</div>
 
 					<div className="button-container">
-						<input className="submit-btn" type="submit" value="Shorten Url" />
+						<input className="submit-btn" type="submit" value="Shorten Url" onClick={counter()} />
 					</div>
 				</form>
 
